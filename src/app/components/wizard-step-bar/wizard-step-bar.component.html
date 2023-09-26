@@ -1,0 +1,8 @@
+<section class="step-wizard d-none">
+  <ul class="step-wizard-list">
+    <li class="step-wizard-item" [ngClass]="step.current?'current-item':''" *ngFor="let step of steps">
+      <span class="progress-count">{{step.stepNumber}}</span>
+      <span class="progress-label">{{step.stepName}}</span>
+    </li>
+  </ul>
+</section>

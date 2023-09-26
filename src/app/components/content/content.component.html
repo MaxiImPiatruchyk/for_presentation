@@ -1,0 +1,141 @@
+<div class="content">
+    <div class="content__title">{{'Płatnośc'}}</div>
+    <div class="content__block-container">
+        <form [formGroup]="paymentsForm" class="content-block">
+            <div class="content-block__customer-info">
+                <div class="content-block__title block-title">{{'Informacja klienta'}}</div>
+                <div class="content-block__wrapper wrapper" *ngFor="let ci of clientInformation">
+                    <div class="input-data">
+                        <input [formControlName]="ci.formControlName" type="text" required>
+                        <div class="underline"
+                             [ngClass]="this.paymentsForm.get(ci.formControlName)?.invalid && this.paymentsForm.get(ci.formControlName)?.touched?'invalid':''"></div>
+                        <label [ngClass]="this.paymentsForm.get(ci.formControlName)?.invalid && this.paymentsForm.get(ci.formControlName)?.touched?'invalid-label':''">{{ci.title}}</label>
+                        <p *ngIf="this.paymentsForm.get(ci.formControlName)?.invalid && this.paymentsForm.get(ci.formControlName)?.touched">
+                            <small class="invalid-text">{{'Pole jest obowiazkowe'}}</small></p>
+                    </div>
+                </div>
+            </div>
+            <div class="content-block__shipping-address">
+                <div class="content-block__title block-title">{{'Adres dostawy'}}</div>
+                <div class="content-block__wrapper wrapper" *ngFor="let si of shippingInformation">
+                    <div class="input-data">
+                        <input type="text" required>
+                        <div class="underline"></div>
+                        <label>{{si.title}}</label>
+                    </div>
+                </div>
+            </div>
+            <div class="content-block__payment">
+                <div class="content-block__title block-title payment_block-title">{{'Płatnośc'}}</div>
+                <div class="content-block__separator"></div>
+                <div class="content-block__payment_types">
+                    <div class="container">
+                        <div class="radio-tile-group">
+                            <div class="input-container">
+                                <input type="radio" name="radio" id="creditCard"
+                                       (click)="changePaymentType('creditCard')"
+                                       [checked]="paymentType==='creditCard'">
+                                <div class="radio-tile">
+                                    <i class="fa-solid fa-credit-card"></i>
+                                    <label for="creditCard">{{'Credit card'|uppercase}}</label>
+                                </div>
+                            </div>
+                            <div class="input-container">
+                                <input type="radio" name="radio" id="paypal" (click)="changePaymentType('paypal')">
+                                <div class="radio-tile">
+                                    <i class="fa-brands fa-cc-paypal"></i>
+                                    <label for="paypal">{{'Paypal'|uppercase}}</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div *ngIf="paymentType==='creditCard'">
+                        <div class="content-block__wrapper wrapper" *ngFor="let item of cardDateCW">
+                            <div class="input-data">
+                                <input type="text" required>
+                                <div class="underline"></div>
+                                <label>{{item.title}}</label>
+                            </div>
+                        </div>
+                        <div class="content-block__two-input">
+                            <div class=" content-block__wrapper wrapper" *ngFor="let item of cardNumberCardPerson">
+                                <div class="input-data">
+                                    <input type="text" required>
+                                    <div class="underline"></div>
+                                    <label>{{item.title}}</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <div class="content-block">
+            <div class="content-block__purchases">
+                <div class="content-block__title block-title">{{'Twój zakup'}}</div>
+                <div class="content-block__separator"></div>
+            </div>
+            <div class="content-block__order-summary order-summary">
+                <div class="order-summary__header">
+                    <div class="order-summary__wrap">
+                        <div class="order-summary__title">
+                            {{'Night Live Music concert 2023'|uppercase}}
+                        </div>
+                        <div class="order-summary__address">
+              <span>
+              <i class="fa-solid fa-location-dot"></i>
+                  {{'Centerum edukacji i inicjatyw kulturalnych, ul. Bryla 113, 03-193 Terespol'}}
+              </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="order-summary__body">
+                    <div class="order-summary__wrap">
+                        <div class="order-summary__date-n-time-container">
+                            <div class="order-summary__date">
+                                <div class="order-summary__subtitle">{{'Data'}}</div>
+                                <div class="order-summary__content">{{'22 lipca 2023'}}</div>
+                            </div>
+                            <div class="order-summary__time">
+                                <div class="order-summary__subtitle">{{'Czas'}}</div>
+                                <div class="order-summary__content">{{'8:00 PM'}}</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="order-summary__separator"></div>
+                    <div class="order-summary__wrap order-summary__place">
+                        <div class="order-summary__seats">
+                            <div class="order-summary-place">
+                                <div class="order-summary__subtitle">Place</div>
+                                <div class="order-summary__big-size-content">127</div>
+                            </div>
+                        </div>
+                        <div class="order-summary__seats">
+                            <div class="order-summary-row">
+                                <div class="order-summary__subtitle">Row</div>
+                                <div class="order-summary__big-size-content">12</div>
+                            </div>
+                        </div>
+                        <div class="order-summary__seats">
+                            <div class="order-summary-gate">
+                                <div class="order-summary__subtitle">Gate</div>
+                                <div class="order-summary__big-size-content">1</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="order-summary__separator"></div>
+                </div>
+                <div class="order-summary__footer">
+                    <div class="order-summary__wrap"
+                         style="display: flex;justify-content: space-between; align-items: center">
+                        <div class="order-summary__price-title">{{'Do zaplaty'}}</div>
+                        <div class="order-summary__big-size-content">{{'124zl'}}</div>
+                    </div>
+                    <div class="pay-button">
+                        <button type="submit" [disabled]="paymentsForm.invalid">{{'Zapłacić'}}</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
